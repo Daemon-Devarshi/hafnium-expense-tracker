@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: Expense Tracker (Future Sync API)
+  version: 0.1.0
+  description: Optional server sync API for expenses. Not implemented in MVP.
+paths:
+  /expenses:
+    get:
+      summary: List expenses (by date)
+      parameters:
+        - in: query
+          name: date
+          schema:
+            type: string
+            format: date
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Expense'
+    post:
+      summary: Create or update an expense
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+      responses:
+        '200': { description: Upserted }
+  /expenses/{id}:
+    delete:
+      summary: Delete expense
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204': { description: Deleted }
+components:
+  schemas:
+    Expense:
+      type: object
+      required: [id, date, amount, createdAt, updatedAt]
+      properties:
+        id: { type: string }
+        date: { type: string, format: date }
+        amount: { type: integer, minimum: 1 }
+        photoRef: { type: string, nullable: true }
+        createdAt: { type: integer, format: int64 }
+        updatedAt: { type: integer, format: int64 }
+

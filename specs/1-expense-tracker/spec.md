@@ -28,6 +28,8 @@ A minimal mobile expense tracker that lets users quickly record an expense with 
 - Dates may be chosen for past or present; future dates are allowed only if the user explicitly selects them.
 - Local storage persists across app restarts; no external backups or cloud sync are required by the app (OS-level backups may still occur per platform settings).
 - The app operates fully offline; no network access is required.
+- No authentication is required; all interactions are local to the device.
+- Data retention: by default, retain user data for at least 1 year; retention period should be configurable in app settings.
 
 ## Key Entities
 - Expense
@@ -101,22 +103,24 @@ Local Data and Image Handling
 - F12. Each expense must store: id, date, amount, optional photo reference, createdAt, updatedAt.
 - F13. Attached photos must be optimized on save (compressed and resized) with a target of ≤ 1 MB file size and long edge ≤ 1600 px, while remaining visually legible.
 - F14. If photo optimization fails, the expense still saves without a photo and informs the user that the image could not be stored.
+- F15. No authentication is required for this MVP; all interactions are local to the device.
+- F16. Data retention: retain expenses for at least 1 year by default; make retention period configurable via app settings.
 
 Usability & Accessibility
-- F15. All interactive elements have accessible labels and appropriate focus order.
-- F16. The UI supports OS text scaling/dynamic type where the stack allows it.
-- F17. Error messages are concise and actionable.
+- F17. All interactive elements have accessible labels and appropriate focus order.
+- F18. The UI supports OS text scaling/dynamic type where the stack allows it.
+- F19. Error messages are concise and actionable.
 
 Performance & Reliability
-- F18. App launch to first interactive form within 2 seconds on a baseline device.
-- F19. Date change updates the list within 1 second for up to 200 items on that date.
-- F20. Attaching and optimizing a typical photo completes within 2 seconds for a 5 MB source image on a baseline device.
-- F21. No crashes in the happy-path flows described in the scenarios above.
+- F20. App launch to first interactive form within 2 seconds on a baseline device.
+- F21. Date change updates the list within 1 second for up to 200 items on that date.
+- F22. Attaching and optimizing a typical photo completes within 2 seconds for a 5 MB source image on a baseline device.
+- F23. No crashes in the happy-path flows described in the scenarios above.
 
 Privacy & Permissions
-- F22. The app requests only necessary permissions (e.g., photos/camera if used) and explains why.
-- F23. All data remains on-device; no network calls are required for core functionality.
-- F24. Logs (if any in debug builds) must not include sensitive user content.
+- F24. The app requests only necessary permissions (e.g., photos/camera if used) and explains why.
+- F25. All data remains on-device; no network calls are required for core functionality.
+- F26. Logs (if any in debug builds) must not include sensitive user content.
 
 ## Success Criteria
 - S1. 95% of valid add-expense attempts complete successfully on first try.
