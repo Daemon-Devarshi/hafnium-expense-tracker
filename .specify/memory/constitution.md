@@ -1,50 +1,58 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Hafnium Constitution
+
+## Scope and Purpose
+- This constitution defines the minimum bar for a mobile application targeting Android and iOS.
+- It is technology independent and applies equally to cross‑platform (e.g., KMP, Flutter, React Native, Ionic) and fully native implementations.
+- When a framework offers multiple ways to do something, prefer the simplest approach that satisfies these rules.
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Modularity First
+- Implement features as self‑contained modules with clear public interfaces; keep internals private.
+- No cyclic dependencies; keep dependency graphs small and justified by need.
+- Maximize shared logic where your chosen stack allows it; use platform‑specific code only when necessary (capabilities, UX, or performance).
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. UI and State
+- Use a clear separation of concerns between UI, state management, and side effects.
+- Prefer unidirectional data flow (state goes down; events go up) via the idioms of your stack (MVVM/MVI/MVU/Redux‑style, etc.).
+- Never block the UI thread. Use appropriate async primitives (threads/dispatch queues/coroutines/promises/streams) and respect component lifecycles.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Testing Minimum Bar
+- For every new feature or bug fix, add at least one unit test (and place tests according to repo conventions).
+- Public module APIs require at least a happy‑path test; critical logic gets at least one edge‑case test.
+- Keep tests fast and deterministic; isolate external I/O behind interfaces and use fakes/mocks where practical.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Integration and Device Smoke
+- Each change must build for both Android and iOS targets using the project’s build system.
+- Provide a smoke check proving the app launches to the first screen without crashing on a simulator/emulator for each platform.
+- Call out backward‑incompatible changes in the change description and migration notes if needed.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Observability, Security, Simplicity
+- Log with structured, meaningful messages in debug builds; avoid logging secrets or sensitive data.
+- Do not commit secrets. Use environment/secure storage and the platform’s recommended facilities for secrets and key material.
+- Request only the permissions you actually need; explain use of user data clearly.
+- Prefer simpler solutions over complex ones; remove dead code and unused dependencies promptly.
+- Version public module APIs using semantic versioning where applicable.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints
+- Platforms: Android and iOS.
+- Performance: Do not block UI; keep startup lean; avoid unnecessary work during app launch; lazy‑load when reasonable.
+- Accessibility: Provide accessible labels/traits, color contrast, and support for dynamic type/OS text scaling where feasible.
+- Privacy: Collect only data that is necessary for features; document the purpose and retention; honor OS privacy controls.
+- Internationalization: Use resource localization mechanisms supported by the chosen stack for user‑facing strings.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow and Quality Gates
+- All changes land via code review; at least one reviewer approval is required.
+- Quality gates for each change:
+  - Builds succeed for Android and iOS targets.
+  - Unit tests pass (including new/updated tests for the change).
+  - Configured linters/formatters pass (use the repo’s settings and scripts).
+- The main branch remains releasable; use feature flags to hide incomplete work.
+- Document notable behavior changes and update README/docs as needed.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+- These rules define the minimum requirements for the mobile app and supersede informal practices.
+- Amendments require a reviewed change that updates this document and includes migration notes when applicable.
+- Reviewers verify compliance; justified exceptions must be written in the change description.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Version: 1.1.0 | Ratified: 2025-11-11 | Last Amended: 2025-11-11
