@@ -22,21 +22,21 @@ Phase 1: Setup
 - [X] T004 Add dependencies to composeApp/build.gradle.kts (Room KMP, Koin, Voyager, kotlinx-datetime)
 
 Phase 2: Foundational
-- [ ] T006 Create domain model Expense in composeApp/src/commonMain/kotlin/com/hafnium/expense/domain/model/Expense.kt
-- [ ] T007 Create Room entity and DAO in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/db/ExpenseEntity.kt
-- [ ] T008 Create ExpenseDao interface in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/db/ExpenseDao.kt
-- [ ] T009 Create AppDatabase in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/db/AppDatabase.kt
-- [ ] T010 Implement platform database providers (Android) in composeApp/src/androidMain/kotlin/com/hafnium/expense/data/db/DatabaseProvider.android.kt
-- [ ] T011 Implement platform database providers (iOS) in composeApp/src/iosMain/kotlin/com/hafnium/expense/data/db/DatabaseProvider.ios.kt
-- [ ] T012 Define ImageStorage interface in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/image/ImageStorage.kt
-- [ ] T013 Implement ImageStorage (Android) in composeApp/src/androidMain/kotlin/com/hafnium/expense/data/image/ImageStorageAndroid.kt
-- [ ] T014 Implement ImageStorage (iOS) in composeApp/src/iosMain/kotlin/com/hafnium/expense/data/image/ImageStorageIos.kt
-- [ ] T015 Create repository interface in composeApp/src/commonMain/kotlin/com/hafnium/expense/domain/repository/ExpenseRepository.kt
-- [ ] T016 Implement repository in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/repository/ExpenseRepositoryImpl.kt
-- [ ] T017 Wire Koin modules in composeApp/src/commonMain/kotlin/com/hafnium/expense/di/Modules.kt
-- [ ] T018 Add Koin start function in composeApp/src/commonMain/kotlin/com/hafnium/expense/di/DI.kt
-- [ ] T019 Setup Voyager navigation shell in composeApp/src/commonMain/kotlin/com/hafnium/expense/navigation/NavGraph.kt
-- [ ] T020 [P] Create base UI theme/components in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/
+- [X] T006 Create domain model Expense in composeApp/src/commonMain/kotlin/com/hafnium/expense/domain/model/Expense.kt
+- [X] T007 Create Room entity and DAO in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/db/ExpenseEntity.kt
+- [X] T008 Create ExpenseDao interface in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/db/ExpenseDao.kt
+- [X] T009 Create AppDatabase in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/db/AppDatabase.kt
+- [X] T010 Implement platform database providers (Android) in composeApp/src/androidMain/kotlin/com/hafnium/expense/data/db/DatabaseProvider.android.kt
+- [X] T011 Implement platform database providers (iOS) in composeApp/src/iosMain/kotlin/com/hafnium/expense/data/db/DatabaseProvider.ios.kt
+- [X] T012 Define ImageStorage interface in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/image/ImageStorage.kt
+- [X] T013 Implement ImageStorage (Android) in composeApp/src/androidMain/kotlin/com/hafnium/expense/data/image/ImageStorageAndroid.kt
+- [X] T014 Implement ImageStorage (iOS) in composeApp/src/iosMain/kotlin/com/hafnium/expense/data/image/ImageStorageIos.kt
+- [X] T015 Create repository interface in composeApp/src/commonMain/kotlin/com/hafnium/expense/domain/repository/ExpenseRepository.kt
+- [X] T016 Implement repository in composeApp/src/commonMain/kotlin/com/hafnium/expense/data/repository/ExpenseRepositoryImpl.kt
+- [X] T017 Wire Koin modules in composeApp/src/commonMain/kotlin/com/hafnium/expense/di/Modules.kt
+- [X] T018 Add Koin start function in composeApp/src/commonMain/kotlin/com/hafnium/expense/di/DI.kt
+- [X] T019 Setup Voyager navigation shell in composeApp/src/commonMain/kotlin/com/hafnium/expense/navigation/NavGraph.kt
+- [X] T020 [P] Create base UI theme/components in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/
 
 Phase 3: US1 – Add an expense (P1)
 Goal: User can add an expense with date (default today), integer amount, optional photo; Save persists locally.
