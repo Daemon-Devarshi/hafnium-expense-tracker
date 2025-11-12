@@ -17,3 +17,24 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
+
+# Kotlin/KMP specific
+*.class
+*.jar
+*.log
+*.hprof
+out/
+
+# Environment & secrets
+.env*
+*.key
+*.keystore
+
+# Test coverage
+coverage/
+*.coverage
+
+# Temporary files
+*.tmp
+*.swp
+*~
