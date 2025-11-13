@@ -26,6 +26,8 @@ Constitution Check
 - Integration & Smoke: Build Android+iOS; smoke launch test → PASS
 - Security/Privacy: No secrets; on-device only; minimal permissions → PASS
 - Simplicity: Minimal deps; remove dead code; feature flags not required for MVP → PASS
+- SOLID: Project follows SOLID design principles — SRP/ISP for small interfaces, DIP via DI, LSP contract testing, OCP for extensibility → PASS
+- Compilation Requirement: Never commit code without successful compilation for Android and iOS targets → PASS
 
 Project Structure
 
@@ -54,4 +56,3 @@ Structure Decision
 
 Complexity Tracking
 - Repository pattern: Chosen to isolate Room and future Ktorfit sync. Direct DB access rejected to keep UI/test simplicity and allow future sync without refactor.
-
