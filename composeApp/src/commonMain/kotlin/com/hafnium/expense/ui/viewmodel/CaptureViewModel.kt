@@ -8,10 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.ExperimentalTime
 
 /**
  * ViewModel for the Expense capture/edit screen.
@@ -19,6 +20,7 @@ import kotlinx.datetime.toLocalDateTime
  * Manages form state, validation, and persistence of expense data.
  * Supports both creating new expenses and editing existing ones.
  */
+@OptIn(ExperimentalTime::class)
 class CaptureViewModel(
     private val repository: ExpenseRepository,
     private val expenseId: Long? = null
@@ -212,9 +214,7 @@ class CaptureViewModel(
     data class UiState(
         val isLoading: Boolean = false,
         val isSaving: Boolean = false,
-        val selectedDate: LocalDate = run {
-            Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-        },
+        val selectedDate: LocalDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date,
         val amountText: String = "",
         val description: String = "",
         val selectedImageData: ByteArray? = null,
@@ -268,4 +268,3 @@ class CaptureViewModel(
         data class LoadError(val message: String) : UiEvent()
     }
 }
-

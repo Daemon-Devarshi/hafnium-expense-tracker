@@ -6,24 +6,36 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 
 /**
- * Android implementation of ImagePicker.
+ * Android implementation of rememberImagePicker.
  *
  * Uses ActivityResultContracts for modern image picking.
  */
-actual class ImagePicker actual constructor() {
-    private var onImageSelectedCallback: ((ByteArray) -> Unit)? = null
-    private var onCancelledCallback: (() -> Unit)? = null
+@Composable
+actual fun rememberImagePicker(
+    onImageSelected: (ByteArray) -> Unit,
+    onCancelled: () -> Unit
+): () -> Unit {
+    val context = LocalContext.current
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        onResult = {
+            if (it != null) {
+                val bytes = context.contentResolver.openInputStream(it)?.readBytes()
+                if (bytes != null) {
+                    onImageSelected(bytes)
+                } else {
+                    onCancelled()
+                }
+            } else {
+                onCancelled()
+            }
+        }
+    )
 
-    actual fun launchPicker(
-        onImageSelected: (ByteArray) -> Unit,
-        onCancelled: () -> Unit
-    ) {
-        onImageSelectedCallback = onImageSelected
-        onCancelledCallback = onCancelled
-        // Note: In a real implementation, this would be called from a Composable context
-        // For now, this is a placeholder
-    }
+    return remember { {
+        launcher.launch("image/*")
+    } }
 }
-

@@ -9,10 +9,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.ExperimentalTime
 
 /**
  * ViewModel for the Expense list screen.
@@ -20,6 +21,7 @@ import kotlinx.datetime.toLocalDateTime
  * Manages the list of expenses for a selected date, date switching,
  * and deletion of expenses.
  */
+@OptIn(ExperimentalTime::class)
 class ListViewModel(
     private val repository: ExpenseRepository
 ) : ViewModel() {
@@ -108,9 +110,7 @@ class ListViewModel(
      */
     data class UiState(
         val isLoading: Boolean = false,
-        val selectedDate: LocalDate = run {
-            Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-        },
+        val selectedDate: LocalDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date,
         val expenses: List<Expense> = emptyList(),
         val isEmpty: Boolean = true,
         val event: UiEvent? = null
@@ -125,4 +125,3 @@ class ListViewModel(
         data class LoadError(val message: String) : UiEvent()
     }
 }
-

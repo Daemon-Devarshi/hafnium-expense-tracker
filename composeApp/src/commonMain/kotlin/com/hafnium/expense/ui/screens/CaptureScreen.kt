@@ -15,14 +15,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -41,6 +36,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.hafnium.expense.ui.viewmodel.CaptureViewModel
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.format
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
@@ -89,8 +85,8 @@ class CaptureScreen(private val expenseId: Long? = null) : Screen {
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = { navigator?.pop() }) {
-                            Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Button(onClick = { navigator?.pop() }) {
+                            Text("← Back")
                         }
                     }
                 )
@@ -193,19 +189,19 @@ class CaptureScreen(private val expenseId: Long? = null) : Screen {
                                             style = MaterialTheme.typography.bodySmall
                                         )
                                     }
-                                    IconButton(
+                                    Button(
                                         onClick = viewModel::onPhotoClear,
                                         modifier = Modifier.size(32.dp)
                                     ) {
-                                        Icon(
-                                            Icons.Default.Close,
-                                            contentDescription = "Clear image",
+                                        Text(
+                                            "Clear",
                                             modifier = Modifier.size(20.dp)
                                         )
                                     }
                                 }
                             }
                             uiState.existingImagePath != null -> {
+                                val existingImagePath = uiState.existingImagePath
                                 Row(
                                     modifier = Modifier.fillMaxSize(),
                                     verticalAlignment = Alignment.CenterVertically
@@ -228,7 +224,7 @@ class CaptureScreen(private val expenseId: Long? = null) : Screen {
                                             style = MaterialTheme.typography.bodyMedium
                                         )
                                         Text(
-                                            uiState.existingImagePath,
+                                            existingImagePath ?: "",
                                             style = MaterialTheme.typography.bodySmall,
                                             maxLines = 2
                                         )
@@ -301,4 +297,3 @@ private fun DatePickerField(
         }
     }
 }
-

@@ -3,6 +3,44 @@
 ## Overview
 This document outlines best practices for organizing reusable code in Kotlin Multiplatform (KMP) projects, with focus on extension functions and utility organization.
 
+## SOLID Design Principles (applied to KMP)
+
+SOLID is a collection of five object-oriented design principles that produce more maintainable, understandable, and flexible software. Below are concrete recommendations for applying each principle in a Kotlin Multiplatform project.
+
+- Single Responsibility Principle (SRP)
+  - Keep each module, class, file, or object focused on a single reason to change.
+  - In KMP: separate domain models, repository contracts, persistence implementations, UI, and utilities into different packages/source sets.
+  - Example: `Expense` (domain) vs `ExpenseEntity` (persistence) vs `ExpenseRepository` (contract).
+
+- Open/Closed Principle (OCP)
+  - Make modules open for extension but closed for modification.
+  - In KMP: design public interfaces and rely on dependency injection (Koin) so you can add new implementations without changing existing code.
+  - Example: add a new `ImageOptimizer` implementation and register it via DI without changing repository code.
+
+- Liskov Substitution Principle (LSP)
+  - Subtypes must be substitutable for their base types.
+  - In KMP: ensure platform-specific `actual` implementations and repository implementations adhere strictly to the contracts defined in `commonMain` interfaces.
+  - Example: `ImageStorageAndroid`/`ImageStorageIos` must behave consistently with `ImageStorage` expectations (save/delete semantics, error handling).
+
+- Interface Segregation Principle (ISP)
+  - Prefer small, role-specific interfaces over large monolithic ones.
+  - In KMP: define narrow contracts in `commonMain` (e.g., `ImageStorage` has only `saveImage`, `deleteImage`, `exists`) and split if responsibilities grow.
+  - Example: if image optimization and storage diverge, introduce `ImageOptimizer` and `ImageStorage` instead of merging both.
+
+- Dependency Inversion Principle (DIP)
+  - High-level modules should not depend on low-level modules; both should depend on abstractions.
+  - In KMP: declare repositories and services as interfaces in `commonMain` and inject concrete implementations via DI from platform/source-set modules.
+  - Example: `CaptureViewModel` depends on `ExpenseRepository` (interface) and receives a platform-registered implementation via Koin.
+
+### Applying SOLID to this repository (practical checklist)
+- [ ] SRP: Verify each package/file has one primary responsibility (domain, data, ui, di, util).
+- [ ] OCP: Add interfaces and extension points before implementing features that may change.
+- [ ] LSP: Create small integration tests that exercise `commonMain` contracts with platform implementations.
+- [ ] ISP: Split large interfaces (if any) into smaller focused interfaces.
+- [ ] DIP: Use DI (Koin) to wire implementations; never `new` concrete classes in `commonMain`.
+
+---
+
 ## Extension Functions in KMP (Recommended Approach)
 
 ### ✅ Best Practice: Separate Utility File
@@ -200,4 +238,3 @@ class DateExtensionsTest {
 - [Kotlin Official Docs - Extensions](https://kotlinlang.org/docs/extensions.html)
 - [KMP Guidelines](https://kotlinlang.org/docs/multiplatform.html)
 - [Jetpack Compose Best Practices](https://developer.android.com/jetpack/compose/best-practices)
-
