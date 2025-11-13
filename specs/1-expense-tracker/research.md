@@ -40,3 +40,12 @@ Open Issues Resolved:
 - Image Format: Compress to JPEG (quality ~80) or PNG if transparency needed; prefer JPEG for photos.
 - Cleanup Strategy: Background job on app start to remove expenses older than retention threshold.
 
+SOLID Rationale and Mapping
+- We adopt SOLID as a guiding design standard to improve maintainability and extensibility across the shared codebase.
+- SRP: We keep domain logic (validations, business rules) in domain services and validators; VMs only handle UI state and orchestration.
+- OCP: Interfaces (e.g., `ExpenseRepository`, `ImageStorage`) provide extension points so new behaviors can be added through DI without changing existing code.
+- LSP: Platform `actual` implementations must behave consistently with `expect`/interface contracts; we plan small contract tests to validate behavior.
+- ISP: Interfaces are intentionally narrow; when features expand we will split responsibilities into smaller interfaces.
+- DIP: High-level modules (ViewModels/use-cases) depend only on abstractions defined in `commonMain`; platform modules provide concrete implementations.
+
+This SOLID-driven approach reduces coupling and simplifies future additions (image optimizers, remote sync, analytics) while keeping the MVP implementation small and testable.

@@ -34,6 +34,18 @@
 - Prefer simpler solutions over complex ones; remove dead code and unused dependencies promptly.
 - Version public module APIs using semantic versioning where applicable.
 
+## SOLID Design Principles (MANDATORY)
+- The repository must follow SOLID principles as a minimum design standard across commonMain code and public interfaces.
+- Single Responsibility Principle (SRP): Prefer small classes and single‑purpose interfaces. Move validation and business rules to domain services or validators rather than spreading them across UI/viewmodels and persistence layers.
+- Open/Closed Principle (OCP): Prefer abstractions and extension points; add new behaviors via new implementations registered through DI rather than modifying existing code.
+- Liskov Substitution Principle (LSP): Platform `actual` implementations and test doubles must be substitutable for their `expect`/interface contracts; behavior should be consistent.
+- Interface Segregation Principle (ISP): Keep interfaces narrow; split interfaces when responsibilities diverge.
+- Dependency Inversion Principle (DIP): Depend on abstractions defined in `commonMain`; inject concrete implementations from platform modules via DI.
+
+Additional guidance:
+- Make SOLID compliance part of code review criteria; reviewers must check for obvious SRP/ISP violations on changes.
+- Add small contract tests to ensure LSP adherence for critical interfaces (e.g., `ImageStorage`, `ExpenseRepository`).
+
 ## Additional Constraints
 - Platforms: Android and iOS.
 - Performance: Do not block UI; keep startup lean; avoid unnecessary work during app launch; lazy‑load when reasonable.
@@ -55,4 +67,4 @@
 - Amendments require a reviewed change that updates this document and includes migration notes when applicable.
 - Reviewers verify compliance; justified exceptions must be written in the change description.
 
-Version: 1.1.0 | Ratified: 2025-11-11 | Last Amended: 2025-11-11
+Version: 1.2.0 | Ratified: 2025-11-13 | Last Amended: 2025-11-13
