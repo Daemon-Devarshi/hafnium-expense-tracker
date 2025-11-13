@@ -2,8 +2,7 @@ package com.hafnium.expense.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
+import kotlinx.datetime.Clock
 
 /**
  * Room entity representing an Expense in the database.
@@ -11,7 +10,7 @@ import kotlin.time.ExperimentalTime
  * This is the persistence layer representation that maps to the database table.
  */
 @Entity(tableName = "expenses")
-data class ExpenseEntity @OptIn(ExperimentalTime::class) constructor(
+data class ExpenseEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val date: String, // Stored as ISO-8601 string (YYYY-MM-DD)
@@ -20,4 +19,5 @@ data class ExpenseEntity @OptIn(ExperimentalTime::class) constructor(
     val imagePath: String? = null,
     val createdAt: Long = Clock.System.now().toEpochMilliseconds(),
     val updatedAt: Long = Clock.System.now().toEpochMilliseconds()
+
 )

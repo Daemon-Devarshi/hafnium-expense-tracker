@@ -58,5 +58,14 @@ interface ExpenseRepository {
      * @return Number of expenses deleted
      */
     suspend fun deleteExpensesOlderThan(cutoffDate: LocalDate): Int
+
+    /**
+     * Save an image and return its path.
+     *
+     * @param imageData The raw image bytes
+     * @param filename The filename to save as
+     * @return The path to the saved image, or null if save failed
+     */
+    suspend fun saveImage(imageData: ByteArray, filename: String): String?
 }
 

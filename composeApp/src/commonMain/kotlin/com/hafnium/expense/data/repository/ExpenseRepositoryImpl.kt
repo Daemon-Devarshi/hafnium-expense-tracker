@@ -58,7 +58,15 @@ class ExpenseRepositoryImpl(
     override suspend fun deleteExpensesOlderThan(cutoffDate: LocalDate): Int {
         return expenseDao.deleteOlderThan(cutoffDate.toString())
     }
-    
+
+    override suspend fun saveImage(imageData: ByteArray, filename: String): String? {
+        return try {
+            imageStorage.saveImage(imageData, filename)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     // Conversion helpers
     private fun Expense.toEntity(): ExpenseEntity {
         return ExpenseEntity(
