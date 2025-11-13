@@ -10,12 +10,12 @@ import java.util.UUID
  * Stores images in the app's cache directory.
  */
 class ImageStorageAndroid(private val context: Context) : ImageStorage {
-
+    
     private val imageDir: File
         get() = File(context.cacheDir, "images").apply {
             mkdirs()
         }
-
+    
     override suspend fun saveImage(imageData: ByteArray, filename: String): String? {
         return try {
             val name = if (filename.isNotEmpty()) filename else "${UUID.randomUUID()}.jpg"
@@ -26,7 +26,7 @@ class ImageStorageAndroid(private val context: Context) : ImageStorage {
             null
         }
     }
-
+    
     override suspend fun deleteImage(imagePath: String): Boolean {
         return try {
             File(imagePath).delete()
@@ -34,7 +34,7 @@ class ImageStorageAndroid(private val context: Context) : ImageStorage {
             false
         }
     }
-
+    
     override suspend fun imageExists(imagePath: String): Boolean {
         return try {
             File(imagePath).exists()

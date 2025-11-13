@@ -12,7 +12,7 @@ import java.util.UUID
  * Stores images in the app's cache directory.
  */
 class ImageStorageIos : ImageStorage {
-
+    
     private val imageDir: String
         get() {
             val paths = NSSearchPathForDirectoriesInDomains(
@@ -30,7 +30,7 @@ class ImageStorageIos : ImageStorage {
             )
             return imagePath
         }
-
+    
     override suspend fun saveImage(imageData: ByteArray, filename: String): String? {
         return try {
             val name = if (filename.isNotEmpty()) filename else "${UUID.randomUUID()}.jpg"
@@ -45,7 +45,7 @@ class ImageStorageIos : ImageStorage {
             null
         }
     }
-
+    
     override suspend fun deleteImage(imagePath: String): Boolean {
         return try {
             NSFileManager.defaultManager.removeItemAtPath(imagePath, error = null)
@@ -53,7 +53,7 @@ class ImageStorageIos : ImageStorage {
             false
         }
     }
-
+    
     override suspend fun imageExists(imagePath: String): Boolean {
         return try {
             NSFileManager.defaultManager.fileExistsAtPath(imagePath)
@@ -61,7 +61,7 @@ class ImageStorageIos : ImageStorage {
             false
         }
     }
-
+    
     private fun ByteArray.toNSData(): Any {
         // Convert ByteArray to NSData
         @Suppress("UNCHECKED_CAST")

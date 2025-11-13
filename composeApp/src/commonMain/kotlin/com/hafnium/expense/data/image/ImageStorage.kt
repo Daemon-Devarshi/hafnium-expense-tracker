@@ -6,7 +6,7 @@ package com.hafnium.expense.data.image
  * Provides platform-independent abstraction for storing and retrieving images.
  */
 interface ImageStorage {
-
+    
     /**
      * Save image data to storage and return the path.
      *
@@ -15,7 +15,7 @@ interface ImageStorage {
      * @return Path to the stored image, or null if storage failed
      */
     suspend fun saveImage(imageData: ByteArray, filename: String = ""): String?
-
+    
     /**
      * Delete image at the specified path.
      *
@@ -23,7 +23,7 @@ interface ImageStorage {
      * @return True if deletion was successful, false otherwise
      */
     suspend fun deleteImage(imagePath: String): Boolean
-
+    
     /**
      * Check if image exists at the specified path.
      *

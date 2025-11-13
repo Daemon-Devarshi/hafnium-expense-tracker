@@ -13,7 +13,7 @@ object ExpenseTrackerColors {
     val Primary = Color(0xFF2E7D32) // Green
     val Secondary = Color(0xFF1565C0) // Blue
     val Tertiary = Color(0xFFF57C00) // Orange
-
+    
     val Error = Color(0xFFB3261E)
     val Surface = Color(0xFFFEFBFF)
     val Background = Color(0xFFFEFBFF)
@@ -52,7 +52,7 @@ fun ExpenseTrackerTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
-
+    
     MaterialTheme(
         colorScheme = colorScheme,
         content = content

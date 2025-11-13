@@ -14,44 +14,44 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface ExpenseDao {
-
+    
     /**
      * Insert a new expense.
      */
     @Insert
     suspend fun insert(expense: ExpenseEntity): Long
-
+    
     /**
      * Update an existing expense.
      */
     @Update
     suspend fun update(expense: ExpenseEntity)
-
+    
     /**
      * Delete an expense.
      */
     @Delete
     suspend fun delete(expense: ExpenseEntity)
-
+    
     /**
      * Get an expense by ID.
      */
     @Query("SELECT * FROM expenses WHERE id = :id")
     suspend fun getById(id: Long): ExpenseEntity?
-
+    
     /**
      * Get all expenses for a specific date.
      * Returns a Flow for reactive updates.
      */
     @Query("SELECT * FROM expenses WHERE date = :date ORDER BY createdAt DESC")
     fun getByDate(date: String): Flow<List<ExpenseEntity>>
-
+    
     /**
      * Get all expenses.
      */
     @Query("SELECT * FROM expenses ORDER BY date DESC, createdAt DESC")
     fun getAll(): Flow<List<ExpenseEntity>>
-
+    
     /**
      * Delete expenses older than a specific date.
      */

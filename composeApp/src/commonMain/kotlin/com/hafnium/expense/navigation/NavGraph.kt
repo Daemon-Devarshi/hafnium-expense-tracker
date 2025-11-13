@@ -1,7 +1,8 @@
 package com.hafnium.expense.navigation
 
+import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.NavigatorDisposeBehavior
 
 /**
  * Navigation graph setup for the Expense Tracker application.
@@ -14,10 +15,11 @@ object NavGraphSetup {
     /**
      * Configure Navigator with app-specific settings.
      */
-    fun createNavigator() = Navigator(
+    @Composable
+    fun createNavigator(screens: List<Screen>) = Navigator(
+        screens = screens
         // Start screen will be set in the UI layer
         // based on platform requirements
-        disposeBehavior = NavigatorDisposeBehavior.PopUntilRoot
     )
 }
 
@@ -28,4 +30,3 @@ sealed class Route {
     data object CaptureList : Route()
     data class CaptureDetail(val expenseId: Long = 0) : Route()
 }
-

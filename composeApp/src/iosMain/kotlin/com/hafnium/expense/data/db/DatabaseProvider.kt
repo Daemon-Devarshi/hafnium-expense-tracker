@@ -10,7 +10,7 @@ import platform.Foundation.NSHomeDirectory
  */
 object DatabaseProvider {
     private var instance: AppDatabase? = null
-
+    
     fun getDatabase(): AppDatabase {
         return instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(

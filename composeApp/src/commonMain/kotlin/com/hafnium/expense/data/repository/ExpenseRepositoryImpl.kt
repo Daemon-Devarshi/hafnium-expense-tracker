@@ -18,9 +18,9 @@ class ExpenseRepositoryImpl(
     private val database: AppDatabase,
     private val imageStorage: ImageStorage
 ) : ExpenseRepository {
-
+    
     private val expenseDao = database.expenseDao()
-
+    
     override suspend fun saveExpense(expense: Expense): Long {
         val entity = expense.toEntity()
         return if (expense.id == 0L) {
@@ -30,23 +30,23 @@ class ExpenseRepositoryImpl(
             expense.id
         }
     }
-
+    
     override suspend fun getExpenseById(id: Long): Expense? {
         return expenseDao.getById(id)?.toExpense()
     }
-
+    
     override fun getExpensesByDate(date: LocalDate): Flow<List<Expense>> {
         return expenseDao.getByDate(date.toString()).map { entities ->
             entities.map { it.toExpense() }
         }
     }
-
+    
     override fun getAllExpenses(): Flow<List<Expense>> {
         return expenseDao.getAll().map { entities ->
             entities.map { it.toExpense() }
         }
     }
-
+    
     override suspend fun deleteExpense(expenseId: Long) {
         val entity = expenseDao.getById(expenseId) ?: return
         if (entity.imagePath != null) {
@@ -54,11 +54,11 @@ class ExpenseRepositoryImpl(
         }
         expenseDao.delete(entity)
     }
-
+    
     override suspend fun deleteExpensesOlderThan(cutoffDate: LocalDate): Int {
         return expenseDao.deleteOlderThan(cutoffDate.toString())
     }
-
+    
     // Conversion helpers
     private fun Expense.toEntity(): ExpenseEntity {
         return ExpenseEntity(
@@ -71,7 +71,7 @@ class ExpenseRepositoryImpl(
             updatedAt = updatedAt
         )
     }
-
+    
     private fun ExpenseEntity.toExpense(): Expense {
         return Expense(
             id = id,

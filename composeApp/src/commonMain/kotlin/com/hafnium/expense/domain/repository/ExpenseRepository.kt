@@ -11,7 +11,7 @@ import kotlinx.datetime.LocalDate
  * Implementation handles the details of data persistence and retrieval.
  */
 interface ExpenseRepository {
-
+    
     /**
      * Create or update an expense.
      *
@@ -19,7 +19,7 @@ interface ExpenseRepository {
      * @return The ID of the saved expense
      */
     suspend fun saveExpense(expense: Expense): Long
-
+    
     /**
      * Get an expense by ID.
      *
@@ -27,7 +27,7 @@ interface ExpenseRepository {
      * @return The expense, or null if not found
      */
     suspend fun getExpenseById(id: Long): Expense?
-
+    
     /**
      * Get all expenses for a specific date.
      *
@@ -35,21 +35,21 @@ interface ExpenseRepository {
      * @return Flow emitting list of expenses for the date
      */
     fun getExpensesByDate(date: LocalDate): Flow<List<Expense>>
-
+    
     /**
      * Get all expenses.
      *
      * @return Flow emitting all expenses sorted by date descending
      */
     fun getAllExpenses(): Flow<List<Expense>>
-
+    
     /**
      * Delete an expense.
      *
      * @param expenseId The ID of the expense to delete
      */
     suspend fun deleteExpense(expenseId: Long)
-
+    
     /**
      * Delete all expenses older than a specified date.
      * Used for data retention cleanup.
