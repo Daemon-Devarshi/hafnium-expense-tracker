@@ -39,6 +39,11 @@ SOLID is a collection of five object-oriented design principles that produce mor
 - [ ] ISP: Split large interfaces (if any) into smaller focused interfaces.
 - [ ] DIP: Use DI (Koin) to wire implementations; never `new` concrete classes in `commonMain`.
 
+### Dependency Injection Best Practices in KMP
+- **Always specify types in Koin module declarations**: Use explicit types like `single<ImageStorage> { ImageStorageAndroid(androidContext()) }` instead of `single { ImageStorageAndroid(androidContext()) }` to ensure Koin can resolve dependencies correctly and prevent runtime injection failures.
+- **Register platform-specific implementations in platform modules**: Keep commonMain focused on interfaces; provide concrete implementations in androidMain/iosMain modules.
+- **Test DI setup**: Before committing, verify that all dependencies can be resolved by running the app or using Koin's dry-run features if available.
+
 ---
 
 ## Extension Functions in KMP (Recommended Approach)
