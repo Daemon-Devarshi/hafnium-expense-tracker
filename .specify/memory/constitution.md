@@ -56,10 +56,10 @@ Additional guidance:
 ## Development Workflow and Quality Gates
 - All changes land via code review; at least one reviewer approval is required.
 - **Never commit code without successful compilation**: All changes must compile successfully for both Android and iOS targets before being committed to the repository.
+- **Verify dependency injection setup**: Ensure all interfaces have concrete implementations registered in DI modules with correct types to prevent runtime injection failures.
 - Quality gates for each change:
   - Builds succeed for Android and iOS targets.
   - Unit tests pass (including new/updated tests for the change).
   - Configured linters/formatters pass (use the repo's settings and scripts).
 - The main branch remains releasable; use feature flags to hide incomplete work.
 - Document notable behavior changes and update README/docs as needed.
-
