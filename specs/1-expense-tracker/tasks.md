@@ -54,12 +54,12 @@ Independent Test: Launch app, enter valid amount, optionally attach photo, Save;
 Phase 4: US2 – View expenses by date (P1)
 Goal: User can view list of expenses for a selected date (default today) and see empty state when none.
 Independent Test: Change date and observe list updating; empty state visible if no items.
-- [ ] T030 (US2) Create ListViewModel in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/viewmodel/ListViewModel.kt
-- [ ] T031 (US2) Implement loadByDate(LocalDate) using ExpenseRepository
-- [ ] T032 (US2) Create ListScreen UI in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/screens/ListScreen.kt
-- [ ] T033 (US2) Add date selector component in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/DateSelector.kt
-- [ ] T034 (US2) Add route for ListScreen in NavGraph.kt and set default date to today
-- [ ] T035 [P] (US2) Unit test repository query-by-date in composeApp/src/commonTest/kotlin/com/hafnium/expense/data/repository/ExpenseRepositoryTest.kt
+- [X] T030 (US2) Create ListViewModel in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/viewmodel/ListViewModel.kt
+- [X] T031 (US2) Implement loadByDate(LocalDate) using ExpenseRepository
+- [X] T032 (US2) Create ListScreen UI in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/screens/ListScreen.kt
+- [X] T033 (US2) Add date selector component in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/DateSelector.kt
+- [X] T034 (US2) Add route for ListScreen in NavGraph.kt and set default date to today
+- [X] T035 [P] (US2) Unit test repository query-by-date in composeApp/src/commonTest/kotlin/com/hafnium/expense/data/repository/ExpenseRepositoryTest.kt
 
 Phase 5: US3 – Edit existing expense (P1)
 Goal: User taps an item in list to open capture form prefilled; editing amount/date and saving updates the entry.

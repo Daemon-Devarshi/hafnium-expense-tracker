@@ -30,11 +30,8 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import com.hafnium.expense.domain.model.Expense
+import com.hafnium.expense.ui.components.DateSelector
 import com.hafnium.expense.ui.viewmodel.ListViewModel
-import com.hafnium.expense.util.minusDays
-import com.hafnium.expense.util.plusDays
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.format
 import org.koin.compose.koinInject
 
 /**
@@ -96,42 +93,12 @@ class ListScreen : Screen {
                     .padding(innerPadding)
             ) {
                 // Date Selector
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Button(
-                        onClick = {
-                            // Navigate to previous day
-                            val previousDay = uiState.selectedDate.minusDays(1)
-                            viewModel.onDateChanged(previousDay)
-                        },
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text("← Prev")
+                DateSelector(
+                    selectedDate = uiState.selectedDate,
+                    onDateChanged = { newDate ->
+                        viewModel.onDateChanged(newDate)
                     }
-
-                    Text(
-                        text = uiState.selectedDate.format(LocalDate.Formats.ISO),
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.weight(1f),
-                        maxLines = 1
-                    )
-
-                    Button(
-                        onClick = {
-                            // Navigate to next day
-                            val nextDay = uiState.selectedDate.plusDays(1)
-                            viewModel.onDateChanged(nextDay)
-                        },
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text("Next →")
-                    }
-                }
+                )
 
                 // Expenses List
                 if (uiState.isLoading) {
