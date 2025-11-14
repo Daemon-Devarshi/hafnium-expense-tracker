@@ -1,19 +1,9 @@
 package com.hafnium.expense.di
 
-import org.koin.core.context.startKoin
-import org.koin.core.module.Module
-
 /**
  * Initializes Koin dependency injection.
  *
  * Call this during app startup to configure all dependencies.
+ * Platform-specific implementations handle context setup.
  */
-fun initKoin(platformModule: Module) {
-    startKoin {
-        modules(
-            commonModule(),
-            platformModule
-        )
-    }
-}
-
+expect fun initKoin(context: Any? = null)

@@ -63,9 +63,3 @@ Additional guidance:
 - The main branch remains releasable; use feature flags to hide incomplete work.
 - Document notable behavior changes and update README/docs as needed.
 
-## Governance
-- These rules define the minimum requirements for the mobile app and supersede informal practices.
-- Amendments require a reviewed change that updates this document and includes migration notes when applicable.
-- Reviewers verify compliance; justified exceptions must be written in the change description.
-
-Version: 1.2.0 | Ratified: 2025-11-13 | Last Amended: 2025-11-13
