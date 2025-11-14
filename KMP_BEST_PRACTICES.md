@@ -46,6 +46,20 @@ SOLID is a collection of five object-oriented design principles that produce mor
 
 ---
 
+## Expect/Actual Classes Best Practices
+
+To ensure smooth multiplatform development and avoid compilation errors:
+
+- **Define `expect` in `commonMain`**: Place `expect` class, function, or property declarations only in the `commonMain` source set.
+- **Provide `actual` in each platform**: Implement `actual` counterparts in every platform source set (e.g., `androidMain`, `iosMain`) where the expect is used.
+- **Match signatures exactly**: Ensure the class name, constructor, and function signatures are identical between `expect` and `actual` declarations.
+- **Avoid duplicates**: Do not declare multiple `actual` implementations of the same `expect` in the same source set.
+- **Use for platform APIs**: Employ `expect`/`actual` when common code needs access to platform-specific APIs (e.g., image pickers, file storage).
+- **Platform-only code**: If a class is only used in one platform and not accessed from common code, define it directly in the platform source set without `expect`/`actual`.
+- **Validate after changes**: Always check for compilation errors after adding or modifying `expect`/`actual` pairs, and ensure the project builds successfully before committing.
+
+---
+
 ## Extension Functions in KMP (Recommended Approach)
 
 ### ✅ Best Practice: Separate Utility File
