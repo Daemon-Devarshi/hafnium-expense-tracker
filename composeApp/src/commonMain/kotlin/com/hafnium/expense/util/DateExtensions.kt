@@ -64,7 +64,7 @@ fun LocalDate.plusDays(days: Int): LocalDate {
  * @param month The month (1-12)
  * @return Number of days in that month
  */
-private fun daysInMonth(year: Int, month: Int): Int {
+internal fun daysInMonth(year: Int, month: Int): Int {
     return when (month) {
         1, 3, 5, 7, 8, 10, 12 -> 31
         4, 6, 9, 11 -> 30
@@ -79,7 +79,7 @@ private fun daysInMonth(year: Int, month: Int): Int {
  * @param year The year to check
  * @return True if leap year, false otherwise
  */
-private fun isLeapYear(year: Int): Boolean {
+internal fun isLeapYear(year: Int): Boolean {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
 }
 

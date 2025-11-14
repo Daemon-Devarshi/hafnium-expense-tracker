@@ -34,9 +34,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import com.hafnium.expense.ui.components.DatePickerField
 import com.hafnium.expense.ui.viewmodel.CaptureViewModel
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.format
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
@@ -255,45 +254,6 @@ class CaptureScreen(private val expenseId: Long? = null) : Screen {
                     Text(if (uiState.isSaving) "Saving..." else "Save Expense")
                 }
             }
-        }
-    }
-}
-
-/**
- * Date picker field component.
- */
-@Composable
-private fun DatePickerField(
-    selectedDate: LocalDate,
-    onDateSelected: (LocalDate) -> Unit,
-    isError: Boolean = false,
-    errorMessage: String? = null
-) {
-    val dateFormatter = LocalDate.Formats.ISO
-    val dateString = selectedDate.format(dateFormatter)
-
-    Column {
-        OutlinedTextField(
-            value = dateString,
-            onValueChange = { /* Read-only field */ },
-            label = { Text("Date") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    // TODO: Open date picker dialog (integrate with platform-specific DatePicker)
-                    // For now, onDateSelected will be called from UI interactions
-                },
-            enabled = false,
-            isError = isError
-        )
-
-        if (isError && errorMessage != null) {
-            Text(
-                text = errorMessage,
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 4.dp)
-            )
         }
     }
 }
