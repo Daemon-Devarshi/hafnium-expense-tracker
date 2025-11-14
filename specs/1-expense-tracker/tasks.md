@@ -38,18 +38,18 @@ Phase 2: Foundational
 - [X] T019 Setup Voyager navigation shell in composeApp/src/commonMain/kotlin/com/hafnium/expense/navigation/NavGraph.kt
 - [X] T020 [P] Create base UI theme/components in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/
 
-Phase 3: US1 – Add an expense (P1)
+Phase 3: US1 – Add an expense (P1) ✅ COMPLETE
 Goal: User can add an expense with date (default today), integer amount, optional photo; Save persists locally.
-Independent Test: Launch app, enter valid amount, optionally attach photo, Save; see item in today’s list.
-- [ ] T021 (US1) Create CaptureViewModel in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/viewmodel/CaptureViewModel.kt
-- [ ] T022 (US1) Implement validation (date required, amount positive integer) in CaptureViewModel
-- [ ] T023 (US1) Implement save() in CaptureViewModel using ExpenseRepository
-- [ ] T024 (US1) Create CaptureScreen UI in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/screens/CaptureScreen.kt
-- [ ] T025 (US1) Add image picker integration stub (platform channels) in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/ImagePicker.kt
-- [ ] T026 (US1) Android image picker wiring in composeApp/src/androidMain/kotlin/com/hafnium/expense/ui/components/ImagePickerAndroid.kt
-- [ ] T027 (US1) iOS image picker wiring in composeApp/src/iosMain/kotlin/com/hafnium/expense/ui/components/ImagePickerIos.kt
-- [ ] T028 (US1) Add route for CaptureScreen in NavGraph.kt
-- [ ] T029 [P] (US1) Add minimal unit test for validation in composeApp/src/commonTest/kotlin/com/hafnium/expense/ui/viewmodel/CaptureViewModelTest.kt
+Independent Test: Launch app, enter valid amount, optionally attach photo, Save; see item in today's list.
+- [X] T021 (US1) Create CaptureViewModel in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/viewmodel/CaptureViewModel.kt
+- [X] T022 (US1) Implement validation (date required, amount positive integer) in CaptureViewModel
+- [X] T023 (US1) Implement save() in CaptureViewModel using ExpenseRepository
+- [X] T024 (US1) Create CaptureScreen UI in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/screens/CaptureScreen.kt
+- [X] T025 (US1) Add image picker integration stub (platform channels) in composeApp/src/commonMain/kotlin/com/hafnium/expense/ui/components/ImagePicker.kt
+- [X] T026 (US1) Android image picker wiring in composeApp/src/androidMain/kotlin/com/hafnium/expense/ui/components/ImagePickerAndroid.kt
+- [X] T027 (US1) iOS image picker wiring in composeApp/src/iosMain/kotlin/com/hafnium/expense/ui/components/ImagePickerIos.kt
+- [X] T028 (US1) Add route for CaptureScreen in NavGraph.kt
+- [X] T029 [P] (US1) Add minimal unit test for validation in composeApp/src/commonTest/kotlin/com/hafnium/expense/ui/viewmodel/CaptureViewModelTest.kt
 
 Phase 4: US2 – View expenses by date (P1)
 Goal: User can view list of expenses for a selected date (default today) and see empty state when none.
