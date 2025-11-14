@@ -6,11 +6,11 @@ package com.hafnium.expense.ui.components
  * Uses UIImagePickerController for selecting photos from the photo library.
  * Note: Full implementation requires UIKit integration at the composition level.
  */
-class ImagePicker constructor() {
+actual class ImagePicker actual constructor() {
     private var onImageSelectedCallback: ((ByteArray) -> Unit)? = null
     private var onCancelledCallback: (() -> Unit)? = null
 
-    fun launchPicker(
+    actual fun launchPicker(
         onImageSelected: (ByteArray) -> Unit,
         onCancelled: () -> Unit
     ) {
