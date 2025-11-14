@@ -123,10 +123,19 @@ class CaptureViewModel(
 
                 val savedId = repository.saveExpense(expense)
 
-                _uiState.value = _uiState.value.copy(
-                    isSaving = false,
-                    event = UiEvent.SaveSuccess(savedId)
-                )
+                // Reset form after successful save (only for new expenses)
+                if (expenseId == null || expenseId <= 0) {
+                    _uiState.value = UiState(
+                        isSaving = false,
+                        event = UiEvent.SaveSuccess(savedId)
+                    )
+                } else {
+                    // For edits, keep the data but show success
+                    _uiState.value = _uiState.value.copy(
+                        isSaving = false,
+                        event = UiEvent.SaveSuccess(savedId)
+                    )
+                }
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isSaving = false,
@@ -137,10 +146,18 @@ class CaptureViewModel(
     }
 
     /**
+     * Clear the current event (after it has been handled).
+     */
+    fun clearEvent() {
+        _uiState.value = _uiState.value.copy(event = null)
+    }
+
+    /**
      * Dismiss the last event (e.g., after showing a toast).
+     * @deprecated Use clearEvent() instead
      */
     fun onEventConsumed() {
-        _uiState.value = _uiState.value.copy(event = null)
+        clearEvent()
     }
 
     // ==================== Private Methods ====================
@@ -268,3 +285,4 @@ class CaptureViewModel(
         data class LoadError(val message: String) : UiEvent()
     }
 }
+

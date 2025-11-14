@@ -21,12 +21,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -56,26 +60,40 @@ class CaptureScreen(private val expenseId: Long? = null) : Screen {
         val navigator = LocalNavigator.current
         val viewModel: CaptureViewModel = koinInject(parameters = { parametersOf(expenseId) })
         val uiState by viewModel.uiState.collectAsState()
+        val snackbarHostState = remember { SnackbarHostState() }
 
         // Handle events
         LaunchedEffect(uiState.event) {
-            when (uiState.event) {
+            when (val event = uiState.event) {
                 is CaptureViewModel.UiEvent.SaveSuccess -> {
-                    // Navigate back to list
-                    navigator?.pop()
+                    // Show success message
+                    snackbarHostState.showSnackbar("Expense saved successfully!")
+                    // Clear the event after showing
+                    viewModel.clearEvent()
                 }
                 is CaptureViewModel.UiEvent.SaveError -> {
-                    // Show error toast (would use a SnackbarHost in a real app)
-                    println("Error: ${(uiState.event as CaptureViewModel.UiEvent.SaveError).message}")
+                    // Show error message
+                    snackbarHostState.showSnackbar("Error: ${event.message}")
+                    viewModel.clearEvent()
                 }
                 is CaptureViewModel.UiEvent.LoadError -> {
-                    println("Load error: ${(uiState.event as CaptureViewModel.UiEvent.LoadError).message}")
+                    snackbarHostState.showSnackbar("Load error: ${event.message}")
+                    viewModel.clearEvent()
                 }
                 null -> {}
             }
         }
 
         Scaffold(
+            snackbarHost = {
+                SnackbarHost(hostState = snackbarHostState) { data ->
+                    Snackbar(
+                        snackbarData = data,
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+            },
             topBar = {
                 TopAppBar(
                     title = {
